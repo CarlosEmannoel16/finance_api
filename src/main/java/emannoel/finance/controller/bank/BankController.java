@@ -18,49 +18,65 @@ import java.util.Optional;
 @RestController
 public class BankController {
 
-    private CreateBankingService createBankingService;
-    private GetBankByIdService getBankByIdService;
-    private DeleteBankingService deleteBankingService;
-    private UpdateBankingService updateBankingService;
+    private final CreateBankingService createBankingService;
+    private final GetBankByIdService getBankByIdService;
+    private final DeleteBankingService deleteBankingService;
+    private final UpdateBankingService updateBankingService;
 
-    public BankController(
-            CreateBankingService createBankingService,
-            GetBankByIdService getBankByIdService,
-            DeleteBankingService deleteBankingService
-    ) {
+    public BankController(CreateBankingService createBankingService, GetBankByIdService getBankByIdService, DeleteBankingService deleteBankingService, UpdateBankingService updateBankingService) {
         this.createBankingService = createBankingService;
         this.getBankByIdService = getBankByIdService;
         this.deleteBankingService = deleteBankingService;
+        this.updateBankingService = updateBankingService;
 
     }
 
     @PostMapping("/bank")
-    public String create(@RequestBody BankingRequestDTO bankingRequestDTO) {
-        this.createBankingService.create(bankingRequestDTO);
-        return "created";
+    public ResponseEntity<Banking> create(@RequestBody BankingRequestDTO bankingRequestDTO) {
+
+        try {
+            Banking bank = this.createBankingService.handler(bankingRequestDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(bank);
+        }catch (Exception e){
+
+            Banking bank = new Banking();
+            bank.setErrorMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(bank);
+        }
+
     }
 
     @GetMapping("/bank/{id}")
-    public Optional<Banking> getById(@PathVariable Long id) {
-        Optional<Banking> bank = this.getBankByIdService.handler(id);
-        return bank;
+    public ResponseEntity<Banking> getById(@PathVariable Long id) throws Exception {
+        try {
+            Banking bank = this.getBankByIdService.handler(id);
+            return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(bank);
+        } catch (Exception e) {
+            Banking bank = new Banking();
+            bank.setErrorMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(bank);
+        }
     }
 
     @DeleteMapping("/bank/{id}")
-    public String delete(@PathVariable Long id) {
-        this.deleteBankingService.handler(id);
-        return "deleted";
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        try {
+            this.deleteBankingService.handler(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Deleted");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(e.getMessage());
+        }
+
 
     }
 
     @PutMapping("/bank")
     public ResponseEntity<String> update(@PathVariable Long id, @RequestBody UpdateRequestBankDTO updateBankRequestDTO) {
-
         try {
             this.updateBankingService.handler(updateBankRequestDTO);
             return ResponseEntity.status(HttpStatus.OK).body("Updated");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(e.getLocalizedMessage());
+            return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(e.getMessage());
         }
 
     }

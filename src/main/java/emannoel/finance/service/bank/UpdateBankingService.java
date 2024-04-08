@@ -18,16 +18,15 @@ public class UpdateBankingService {
          this.bankingRepository = bankingRepository;
      }
 
-    public Banking handler(UpdateRequestBankDTO updateRequestBankDTO) throws NotFoundException {
+    public void handler(UpdateRequestBankDTO updateRequestBankDTO) throws NotFoundException {
 
         Optional<Banking> bankingOptional = this.bankingRepository.findById(updateRequestBankDTO.id());
         if(bankingOptional.isPresent()) {
             Banking bank = bankingOptional.get();
             bank.setName(updateRequestBankDTO.name());
             this.bankingRepository.save(bank);
-            return bank;
+            return;
         }
-
         throw new NotFoundException("Banco não encontrado");
 
      }

@@ -14,8 +14,7 @@ public class CreateBankingService {
         this.bankingRepository = bankingRepository;
     }
 
-    public Banking create(BankingRequestDTO bankingDTO){
-
+    public Banking handler(BankingRequestDTO bankingDTO){
         Banking banking = new Banking();
         banking.setName(bankingDTO.name());
         return this.bankingRepository.save(banking);
