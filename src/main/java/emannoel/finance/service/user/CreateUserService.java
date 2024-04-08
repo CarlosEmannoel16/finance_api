@@ -1,4 +1,4 @@
-package emannoel.finance.service.bank.user;
+package emannoel.finance.service.user;
 
 import emannoel.finance.DTOs.UserRequestDTO;
 import emannoel.finance.model.user.User;
@@ -23,6 +23,8 @@ public class CreateUserService {
         user.setPassword(userRequestDTO.password());
         this.userRepository.save(user);
         return user;
+
+
 
     }
 }
