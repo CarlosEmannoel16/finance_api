@@ -53,7 +53,7 @@ public class BankController {
 
     }
 
-    @PutMapping()
+    @PutMapping("/bank")
     public ResponseEntity<String> update(@PathVariable Long id, @RequestBody UpdateRequestBankDTO updateBankRequestDTO) {
 
         try {
