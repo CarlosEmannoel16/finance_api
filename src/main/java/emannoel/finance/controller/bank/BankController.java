@@ -28,22 +28,19 @@ public class BankController {
         this.getBankByIdService = getBankByIdService;
         this.deleteBankingService = deleteBankingService;
         this.updateBankingService = updateBankingService;
-
     }
 
     @PostMapping("/bank")
     public ResponseEntity<Banking> create(@RequestBody BankingRequestDTO bankingRequestDTO) {
-
         try {
             Banking bank = this.createBankingService.handler(bankingRequestDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(bank);
-        }catch (Exception e){
+        } catch (Exception e) {
 
             Banking bank = new Banking();
             bank.setErrorMessage(e.getMessage());
             return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(bank);
         }
-
     }
 
     @GetMapping("/bank/{id}")
@@ -66,8 +63,6 @@ public class BankController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(e.getMessage());
         }
-
-
     }
 
     @PutMapping("/bank")
@@ -78,6 +73,5 @@ public class BankController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(e.getMessage());
         }
-
     }
 }
