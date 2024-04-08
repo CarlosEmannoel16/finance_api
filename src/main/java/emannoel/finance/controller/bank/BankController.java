@@ -66,7 +66,7 @@ public class BankController {
     }
 
     @PutMapping("/bank")
-    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody UpdateRequestBankDTO updateBankRequestDTO) {
+    public ResponseEntity<String> update(@RequestBody UpdateRequestBankDTO updateBankRequestDTO) {
         try {
             this.updateBankingService.handler(updateBankRequestDTO);
             return ResponseEntity.status(HttpStatus.OK).body("Updated");
