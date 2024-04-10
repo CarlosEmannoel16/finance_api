@@ -1,8 +1,8 @@
 package emannoel.finance.controller.bank;
 
 
-import emannoel.finance.DTOs.BankingRequestDTO;
-import emannoel.finance.DTOs.UpdateRequestBankDTO;
+import emannoel.finance.DTOs.requests.BankingRequestDTO;
+import emannoel.finance.DTOs.requests.UpdateRequestBankDTO;
 import emannoel.finance.model.bank.Banking;
 import emannoel.finance.service.bank.CreateBankingService;
 import emannoel.finance.service.bank.DeleteBankingService;
@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 public class BankController {

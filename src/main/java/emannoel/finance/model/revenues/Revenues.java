@@ -1,9 +1,7 @@
 package emannoel.finance.model.revenues;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import emannoel.finance.model.bank.Banking;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,4 +18,9 @@ public class Revenues {
     private String description;
     private Double amount;
     private Date dateOfOccurrence;
+    private String errorMessage;
+
+    @ManyToOne
+    @JoinColumn(name = "id_bank", nullable = false)
+    private Banking banking;
 }

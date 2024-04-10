@@ -1,11 +1,11 @@
 package emannoel.finance.model.bank;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import emannoel.finance.model.revenues.Revenues;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -17,5 +17,8 @@ public class Banking {
     private Long id;
     private String name;
     private String ErrorMessage;
+
+    @OneToMany(mappedBy = "banking", cascade = CascadeType.ALL)
+    private List<Revenues> revenues;
 
 }

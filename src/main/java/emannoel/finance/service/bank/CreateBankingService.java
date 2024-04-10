@@ -1,7 +1,7 @@
 package emannoel.finance.service.bank;
 
 import emannoel.finance.model.bank.Banking;
-import emannoel.finance.DTOs.BankingRequestDTO;
+import emannoel.finance.DTOs.requests.BankingRequestDTO;
 import emannoel.finance.repository.BankingRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package emannoel.finance.service.bank;
 
 
-import emannoel.finance.DTOs.UpdateRequestBankDTO;
+import emannoel.finance.DTOs.requests.UpdateRequestBankDTO;
 import emannoel.finance.exceptions.NotFoundException;
 import emannoel.finance.model.bank.Banking;
 import emannoel.finance.repository.BankingRepository;
@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class UpdateBankingService {
 
-    private BankingRepository bankingRepository;
+    private final BankingRepository bankingRepository;
 
      UpdateBankingService(BankingRepository bankingRepository){
          this.bankingRepository = bankingRepository;

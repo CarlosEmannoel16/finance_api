@@ -1,7 +1,7 @@
-package emannoel.finance.controller.bank;
+package emannoel.finance.controller.user;
 
 
-import emannoel.finance.DTOs.UserRequestDTO;
+import emannoel.finance.DTOs.requests.UserRequestDTO;
 import emannoel.finance.model.user.User;
 import emannoel.finance.service.user.CreateUserService;
 import org.springframework.web.bind.annotation.RequestBody;
